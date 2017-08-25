@@ -9,7 +9,6 @@ build() {
 # base
   docker build \
     -t pixelmilk/exhibitor \
-    --squash \
     --compress \
     --build-arg ZOOKEEPER_VERSION=${ZOOKEEPER_VERSION} \
     . || exit $?
