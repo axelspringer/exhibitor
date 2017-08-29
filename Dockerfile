@@ -29,18 +29,15 @@ ENV \
     ZOOKEEPER_HOME=${ZOOKEEPER_HOME:-/opt/zookeeper} \
     ZOOKEEPER_VERSION=${ZOOKEEPER_VERSION:-3.4.10} \
     EXHIBITOR_HOME=${EXHIBITOR_HOME:-/opt/exhibitor} \
-    EXHIBITOR_DEPS="bash"
+    EXHIBITOR_DEPS="bash curl"
 
 RUN \
     # Temp
     export TEMP=$(mktemp -d) \
-
     # Install deps
     && apk add --update --cache-dir=${TEMP} ${EXHIBITOR_DEPS} \
-
     # Create folders
     && mkdir -p ${JAVA_PREFS} ${ZOOKEEPER_HOME} ${EXHIBITOR_HOME} \
-
     # Zookeper release
     && wget -O ${TEMP}/zookeeper.tar.gz http://www.apache.org/dist/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz \
     && tar -xzf ${TEMP}/zookeeper.tar.gz -C ${ZOOKEEPER_HOME} --strip-components=1

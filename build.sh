@@ -21,4 +21,4 @@ build() {
 }
 
 #     Exhibitor   ZooKeeper
-build "1.5.6"	  	"3.4.10"
+build "1.6.0"	  	"3.4.10"

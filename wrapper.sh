@@ -50,8 +50,8 @@ fi
 
 if [[ -n ${S3_BUCKET} ]]; then
   echo "backup-extra=throttle\=&bucket-name\=${S3_BUCKET}&key-prefix\=${S3_PREFIX}&max-retries\=4&retry-sleep-ms\=30000" >> /opt/exhibitor/defaults.conf
-
-  BACKUP_CONFIG="--configtype s3 --s3config ${S3_BUCKET}:${S3_PREFIX} ${S3_SECURITY} --s3region ${AWS_REGION} --s3backup true"
+	
+	BACKUP_CONFIG="--configtype s3 --s3config ${S3_BUCKET}:${S3_PREFIX} ${S3_SECURITY} --s3region ${AWS_REGION} --s3backup true"
 else
   BACKUP_CONFIG="--configtype file --fsconfigdir /opt/zookeeper/local_configs --filesystembackup true"
 fi
@@ -73,6 +73,11 @@ EOF
     HTTP_PROXY="--s3proxy=/opt/exhibitor/proxy.properties"
 fi
 
+# use EC2 IPv4 Address
+if [ -n "$EC2_INSTANCE" ]; then
+    LOCAL_IPV4=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
+		echo $LOCAL_IPV4 > /etc/hostname
+fi
 
 exec 2>&1
 
