@@ -9,6 +9,7 @@ DEFAULT_LOG_DIR="/opt/zookeeper/transactions"
 DEFAULT_ZK_ENSEMBLE_SIZE=0
 S3_SECURITY=""
 HTTP_PROXY=""
+ARGS=""
 : ${HOSTNAME:?$MISSING_VAR_MESSAGE}
 : ${AWS_REGION:=$DEFAULT_AWS_REGION}
 : ${ZK_DATA_DIR:=$DEFAULT_DATA_DIR}
@@ -18,6 +19,7 @@ HTTP_PROXY=""
 : ${HTTP_PROXY_PORT:=""}
 : ${HTTP_PROXY_USERNAME:=""}
 : ${HTTP_PROXY_PASSWORD:=""}
+: ${ARGS:=""}
 
 cat <<- EOF > /opt/exhibitor/defaults.conf
 	zookeeper-data-directory=$ZK_DATA_DIR
@@ -63,20 +65,18 @@ fi
 
 
 if [[ -n $HTTP_PROXY_HOST ]]; then
-    cat <<- EOF > /opt/exhibitor/proxy.properties
-      com.netflix.exhibitor.s3.proxy-host=${HTTP_PROXY_HOST}
-      com.netflix.exhibitor.s3.proxy-port=${HTTP_PROXY_PORT}
-      com.netflix.exhibitor.s3.proxy-username=${HTTP_PROXY_USERNAME}
-      com.netflix.exhibitor.s3.proxy-password=${HTTP_PROXY_PASSWORD}
+  cat <<- EOF > /opt/exhibitor/proxy.properties
+    com.netflix.exhibitor.s3.proxy-host=${HTTP_PROXY_HOST}
+    com.netflix.exhibitor.s3.proxy-port=${HTTP_PROXY_PORT}
+    com.netflix.exhibitor.s3.proxy-username=${HTTP_PROXY_USERNAME}
+    com.netflix.exhibitor.s3.proxy-password=${HTTP_PROXY_PASSWORD}
 EOF
 
-    HTTP_PROXY="--s3proxy=/opt/exhibitor/proxy.properties"
+	HTTP_PROXY="--s3proxy=/opt/exhibitor/proxy.properties"
 fi
 
-# use EC2 IPv4 Address
-if [[ -n $EC2_INSTANCE ]]; then
-	LOCAL_IPV4=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
-	HOSTNAME=$LOCAL_IPV4
+if [[ -n $LOCAL_IPV4 ]]; then 
+	HOSTNAME=$(/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 fi
 
 exec 2>&1
@@ -96,5 +96,6 @@ java -jar /opt/exhibitor/exhibitor.jar \
   --port 8181 --defaultconfig /opt/exhibitor/defaults.conf \
   ${BACKUP_CONFIG} \
   ${HTTP_PROXY} \
-  --hostname ${HOSTNAME} \
+	${ARGS} \
+	--hostname ${HOSTNAME} \
   ${SECURITY}
