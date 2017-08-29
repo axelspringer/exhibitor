@@ -73,12 +73,6 @@ EOF
     HTTP_PROXY="--s3proxy=/opt/exhibitor/proxy.properties"
 fi
 
-# use EC2 IPv4 Address
-if [ -n "$EC2_INSTANCE" ]; then
-    LOCAL_IPV4=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
-		echo $LOCAL_IPV4 > /etc/hostname
-fi
-
 exec 2>&1
 
 # If we use exec and this is the docker entrypoint, Exhibitor fails to kill the ZK process on restart.
