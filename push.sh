@@ -8,8 +8,8 @@ push() {
 
 # base
   echo
-  echo Pushing pixelmilk/exhibitor:${TAG}
-  docker push pixelmilk/exhibitor:${TAG} || exit $?
+  echo Pushing axelspringer/exhibitor:${TAG}
+  docker push axelspringer/exhibitor:${TAG} || exit $?
 
 }
 

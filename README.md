@@ -1,16 +1,16 @@
-[![Build Status](https://travis-ci.org/katallaxie/exhibitor.svg?branch=master)](https://travis-ci.org/katallaxie/exhibitor) [![Docker Stars](https://img.shields.io/docker/stars/pixelmilk/exhibitor.svg)](https://hub.docker.com/r/pixelmilk/exhibitor/) [![Docker Pulls](https://img.shields.io/docker/pulls/pixelmilk/exhibitor.svg)](https://hub.docker.com/r/pixelmilk/exhibitor/)
+[![Build Status](https://travis-ci.org/axelspringer/exhibitor.svg?branch=master)](https://travis-ci.org/axelspringer/exhibitor) [![Docker Stars](https://img.shields.io/docker/stars/axelspringer/exhibitor.svg)](https://hub.docker.com/r/axelspringer/exhibitor/) [![Docker Pulls](https://img.shields.io/docker/pulls/axelspringer/exhibitor.svg)](https://hub.docker.com/r/axelspringer/exhibitor/)
 
 Runs an [Exhibitor](https://github.com/Netflix/exhibitor)-managed [ZooKeeper](http://zookeeper.apache.org/) instance using S3 for backups and automatic node discovery.
 
-Available on the Docker Index as [pixelmilk/exhibitor](https://index.docker.io/u/pixelmik/exhibitor/):
+Available on the Docker Index as [axelspringer/exhibitor](https://index.docker.io/u/pixelmik/exhibitor/):
 
-    `docker pull pixelmilk/exhibitor`
+    `docker pull axelspringer/exhibitor`
 
 ### Versions
-* Exhibitor 1.5.6
+* Exhibitor 1.6.0
 * ZooKeeper 3.4.10
 
-[![](https://badge.imagelayers.io/pixelmilk/mesos-exhibitor:1.5.6-3.4.10.svg)](https://imagelayers.io/?images=pixelmilk/mesos-agent:1.5.6-3.4.10)
+[![](https://badge.imagelayers.io/axelspringer/mesos-exhibitor:1.6.0-3.4.10.svg)](https://imagelayers.io/?images=axelspringer/mesos-exhibitor:1.6.0-3.4.10.svg)
 
 ### Usage
 The container expects the following environment variables to be passed in:
@@ -37,7 +37,7 @@ Starting the container:
         -e AWS_ACCESS_KEY_ID=<access_key> \
         -e AWS_SECRET_ACCESS_KEY=<secret_key> \
         -e HOSTNAME=<host> \
-        pixelmilk/exhibitor:latest
+        axelspringer/exhibitor:1.6.0-3.4.10
 
 Once the container is up, confirm Exhibitor is running:
 
@@ -99,7 +99,7 @@ docker run -p 8181:8181 -p 2181:2181 -p 2888:2888 -p 3888:3888 \
     -e S3_BUCKET=<bucket> \
     -e S3_PREFIX=<key_prefix> \
     -e HOSTNAME=<host> \
-    pixelmilk/exhibitor:latest
+    axelspringer/exhibitor:1.6.0-3.4.10
 ```
 
 # License

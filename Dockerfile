@@ -1,11 +1,11 @@
 FROM alpine:3.6 as build
-MAINTAINER Sebastian Döll <sebastian@pixelmilk.com>
+MAINTAINER Sebastian Döll <sebastian@katallaxie.me>
 
 ENV \
     JAVA_HOME="/usr/lib/jvm/default-jvm" \
     BUILD_DEPS="openjdk8 maven curl bash tar" \
     BUILD_HOME="/tmp/exhibitor" \
-    POM_FILE="https://raw.githubusercontent.com/Netflix/exhibitor/master/exhibitor-standalone/src/main/resources/buildscripts/standalone/maven/pom.xml"
+    POM_FILE="https://gist.githubusercontent.com/katallaxie/7dd4e7e6e03b99bede34647460d6d65e/raw/fe081770fd1a62ddfcef2664c33a248beadd282a/pom.xml"
 
 RUN \
     # Install build deps
@@ -20,7 +20,7 @@ RUN \
     && ln -s ${BUILD_HOME}/target/exhibitor*jar ${BUILD_HOME}/exhibitor.jar
 
 FROM openjdk:8-jdk-alpine
-MAINTAINER Sebastian Döll <sebastian@pixelmilk.com>
+MAINTAINER Sebastian Döll <sebastian@katallaxie.me>
 
 ARG EXHIBITOR_HOME
 ARG ZOOKEEPER_HOME

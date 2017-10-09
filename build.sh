@@ -8,15 +8,15 @@ build() {
 
 # base
   docker build \
-    -t pixelmilk/exhibitor \
+    -t axelspringer/exhibitor \
     --compress \
     --build-arg ZOOKEEPER_VERSION=${ZOOKEEPER_VERSION} \
     . || exit $?
 
 # tag
   echo
-  echo Tagging pixelmilk/exhibitor:${TAG}
-  docker tag pixelmilk/exhibitor pixelmilk/exhibitor:${TAG} \
+  echo Tagging axelspringer/exhibitor:${TAG}
+  docker tag axelspringer/exhibitor axelspringer/exhibitor:${TAG} \
     || exit $?
 }
 
