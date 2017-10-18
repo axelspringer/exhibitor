@@ -29,7 +29,7 @@ ENV \
     ZOOKEEPER_HOME=${ZOOKEEPER_HOME:-/opt/zookeeper} \
     ZOOKEEPER_VERSION=${ZOOKEEPER_VERSION:-3.4.10} \
     EXHIBITOR_HOME=${EXHIBITOR_HOME:-/opt/exhibitor} \
-    EXHIBITOR_DEPS="bash curl"
+    EXHIBITOR_DEPS="bash curl jq"
 
 RUN \
     # Temp
