@@ -11,6 +11,7 @@ build() {
     -t axelspringer/exhibitor \
     --compress \
     --build-arg ZOOKEEPER_VERSION=${ZOOKEEPER_VERSION} \
+    --build-arg EXHIBITOR_VERSION=${EXHIBITOR_VERSION} \
     . || exit $?
 
 # tag
@@ -21,4 +22,4 @@ build() {
 }
 
 #     Exhibitor   ZooKeeper
-build "1.6.0"	  	"3.4.10"
+build "1.7.0"	  	"3.4.11"
